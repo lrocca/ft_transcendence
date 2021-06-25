@@ -1,0 +1,27 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  margin: 1rem 0;
+  color: inherit;
+  text-decoration: underline;
+}
+
+* {
+  color: #ddd;
+  background: #111;
+  font-family: monospace;
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

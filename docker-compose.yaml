@@ -1,0 +1,40 @@
+version: "3"
+services:
+  client:
+    image: "node:alpine"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./client:/home/node/app
+    command: sh -c "npm install && npm run dev"
+    expose:
+      - "3000"
+    env_file:
+      - .env
+  server:
+    image: "node:alpine"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./server:/home/node/app
+    command: "npm start"
+    expose:
+      - "4040"
+    env_file:
+      - .env
+  proxy:
+    image: "nginx:alpine"
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    command: [nginx, '-g', 'daemon off;']
+    expose:
+      - "80"
+    ports:
+      - "8000:80"
+    depends_on:
+      - "client"
+      - "server"
+volumes:
+  client:
+  server:
+  proxy:
